@@ -1,0 +1,12 @@
+{
+  version: 2,
+  mediaFileName: 'ego.mp4',
+  cutSegments: [
+    {
+      start: 52.300862,
+      end: 64.126587,
+      name: '',
+      selected: true,
+    },
+  ],
+}
