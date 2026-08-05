@@ -52,9 +52,14 @@
           <a href="#">Xinying Guo<sup>1</sup></a>
           <a href="#">Fengjie Gao<sup>1</sup></a>
           <a href="#">Jianfei Yang<sup>1♣</sup></a>
-          <a href="#">Shanghang Zhang<sup>2,3♣</sup></a>
+          <a href="#">Shanghang Zhang<sup>2♣</sup></a>
         </div>
         <p class="affiliations reveal"><sup>1</sup> MARS Lab, NTU &nbsp; <sup>2</sup> PKU &nbsp; <sup>3</sup> BAAI &nbsp; <sup>4</sup> HKUST(GZ)<br><sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Project lead &nbsp; <sup>♣</sup> Corresponding authors</p>
+
+        <div class="institution-logos reveal" aria-label="Affiliated research labs">
+          <span class="institution-logo mars-logo"><img src="assets/logo/mars_lab_logo.png" alt="MARS Lab" /></span>
+          <span class="institution-logo hmi-logo"><img src="assets/logo/hmi_logo.png" alt="HMI Lab" /></span>
+        </div>
 
         <div class="action-row reveal">
           <a class="action primary" href="#">Paper <span>↗</span></a>
@@ -63,7 +68,6 @@
           <a class="action" href="#dataset">Dataset (WIP)<span>↓</span></a>
         </div>
         </div>
-        <p class="caption"><span>ω-0</span> Jointly modeling future visual states and controller-compatible whole-body action latents for fluid household loco-manipulation.</p>
       </section>
 
       <section id="abstract" class="content-section section-shell wide">
@@ -71,10 +75,10 @@
         <div class="section-content">
           <h2 class="reveal">Abstract</h2>
           <figure class="framework-figure method-teaser-figure reveal">
-            <a class="framework-image-link" href="assets/teaser_final.svg?v=3" target="_blank" aria-label="Open the full-size ω-0 project overview figure">
-              <img src="assets/teaser_final.svg?v=3" alt="Overview of ω-0, the ω-HOME dataset, and real-world humanoid deployments" loading="lazy" />
+            <a class="framework-image-link" href="assets/figures/teaser_final.svg?v=4" target="_blank" aria-label="Open the full-size ω-0 project overview figure">
+              <img src="assets/figures/teaser_final.svg?v=4" alt="Overview of ω-0, the ω-HOME dataset, and real-world humanoid deployments" loading="lazy" />
             </a>
-            <figcaption><span>FIG. 04</span> Overview of ω-0, the ω-HOME dataset, multimodal training signals, and real-world household deployments. <a href="assets/teaser_final.svg?v=3" target="_blank">Open full figure ↗</a></figcaption>
+            <figcaption><span>FIG. 04</span> Overview of ω-0, the ω-HOME dataset, multimodal training signals, and real-world household deployments. <a href="assets/figures/teaser_final.svg?v=4" target="_blank">Open full figure ↗</a></figcaption>
           </figure>
           <div class="abstract-text reveal">
             <p>Humanoid household tasks often require concurrent loco-manipulation, where the robot must move, adjust posture, maintain balance, and manipulate objects as a single coordinated behavior. Yet existing humanoid policies typically decompose locomotion and manipulation, while recent world-action models remain either arm-centric or video-centered. We present <span class="math-name"><i>ω</i>-0</span>, a latent predictive whole-body world-action model for real-world humanoid concurrent loco-manipulation. Given a language instruction, current visual observation, and robot proprioceptive state, <span class="math-name"><i>ω</i>-0</span> directly predicts controller-compatible whole-body action latents for real-robot execution. Rather than reconstructing future videos, the model learns compact future observation embeddings as a lightweight predictive objective, coupling latent visual foresight with diffusion-based whole-body action generation. It supports egocentric RGB, exocentric RGB, and exocentric depth inputs, and leverages controller-based simulation replay to ground human and public visual-motion priors into robot-executable action latents. We further collect <span class="math-name"><i>ω</i>-HOME</span>, a 40+ hour real-world household humanoid dataset with synchronized multi-view observations, whole-body SMPL motions, robot states, and action latents. Real-world experiments on 11 household tasks demonstrate that a single <span class="math-name"><i>ω</i>-0</span> model produces smooth manipulate-while-moving behaviors and consistently outperforms representative imitation learning, VLA, humanoid, and world-action-model baselines.</p>
@@ -93,13 +97,13 @@
         <div class="section-content">
           <div class="section-heading reveal">
             <h2>How it works</h2>
-            <p><span class="math-name"><i>ω</i>-0</span> couples visual foresight and whole-body control, predicting what should change in the scene together with how the humanoid should move.</p>
+            <p><span class="math-name"><i>ω</i>-0</span> couples visual foresight with coordinated whole-body control in a single model.</p>
           </div>
           <figure class="framework-figure reveal">
-            <a class="framework-image-link" href="assets/framework_final.svg?v=3" target="_blank" aria-label="Open the full-size ω-0 framework figure">
-              <img src="assets/framework_final.svg?v=3" alt="The ω-0 framework architecture and three-stage training pipeline" loading="lazy" />
+            <a class="framework-image-link" href="assets/figures/framework_final.svg?v=4" target="_blank" aria-label="Open the full-size ω-0 framework figure">
+              <img src="assets/figures/framework_final.svg?v=4" alt="The ω-0 framework architecture and three-stage training pipeline" loading="lazy" />
             </a>
-            <figcaption><span>FIG. 05</span> The ω-0 framework jointly learns action-aware semantics, future visual latents, and controller-compatible whole-body action latents through a three-stage training pipeline. <a href="assets/framework_final.svg?v=3" target="_blank">Open full figure ↗</a></figcaption>
+            <figcaption><span>FIG. 05</span> The ω-0 framework jointly learns action-aware semantics, future visual latents, and controller-compatible whole-body action latents through a three-stage training pipeline. <a href="assets/figures/framework_final.svg?v=4" target="_blank">Open full figure ↗</a></figcaption>
           </figure>
           <div class="method-summary reveal">
             <article>
@@ -118,13 +122,6 @@
               <p>Public motions are replayed through SONIC to obtain executable robot states and action latents, then the model is fine-tuned on synchronized real-world demonstrations. Real-time chunking carries a clean motion prefix across predictions for continuous receding-horizon deployment.</p>
             </article>
           </div>
-          <!-- <div class="method-diagram reveal" role="img" aria-label="omega zero method diagram">
-            <div class="method-node"><small>01 · PRETRAIN</small><strong>Tokenize</strong><span>Whole-body action VLM</span></div>
-            <div class="method-arrow">→</div>
-            <div class="method-node featured"><small>02 · ALIGN</small><strong>Predict</strong><span>Future visual + motion latents</span></div>
-            <div class="method-arrow">→</div>
-            <div class="method-node"><small>03 · POSTTRAIN</small><strong>Deploy</strong><span>Action DiT + SONIC</span></div>
-          </div> -->
           <p class="method-note reveal">Language + ego/exo observations + proprioception → future-aware video and motion queries → whole-body action latents → SONIC controller.</p>
         </div>
       </section>
@@ -134,12 +131,12 @@
         <div class="section-content">
           <div class="section-heading reveal">
             <h2>Demo Library</h2>
-            <p>Browse real-world deployments by capability. Each result uses the same compact card format so the collection can grow without losing structure.</p>
+            <p>Browse real-world deployments by capability in a compact, organized task library.</p>
           </div>
           <div class="featured-demo-section">
             <div class="demo-subheading reveal">
               <span>FEATURED DEMOS</span>
-              <p>One representative long-horizon deployment highlighting concurrent whole-body coordination.</p>
+              <!-- <p>One representative long-horizon deployment highlighting concurrent whole-body coordination.</p> -->
             </div>
             <div class="featured-demo-grid">
               <article class="featured-demo-card reveal">
@@ -180,19 +177,14 @@
             <div><span class="dataset-kicker">THE DATASET</span><h2 class="dataset-title"><span class="dataset-omega">ω</span><span>–HOME</span></h2></div>
             <p>A large-scale, real-world multimodal household humanoid dataset built specifically for whole-body loco-manipulation.</p>
           </div>
-          <!-- <div class="dataset-numbers reveal">
-            <div class="dataset-number primary-number"><strong>40.3</strong><span>HOURS</span><small>of real-world demonstrations</small></div>
-            <div class="dataset-number"><strong>24</strong><span>TASKS</span><small>across 8 household capabilities</small></div>
-            <div class="dataset-number"><strong>4,827</strong><span>EPISODES</span><small>synchronized at 30 Hz</small></div>
-          </div> -->
           <div class="dataset-figures">
             <div class="dataset-figure-heading reveal">
               <span class="panel-label">DATASET AT A GLANCE</span>
-              <p>Task coverage, multimodal collection setup, and the distribution of real-world demonstrations.</p>
+              <!-- <p>Task coverage, multimodal collection setup, and the distribution of real-world demonstrations.</p> -->
             </div>
             <div class="dataset-figure-grid">
               <figure class="dataset-figure reveal">
-                <a href="assets/datasets.svg?v=3" target="_blank"><img src="assets/datasets.svg?v=3" alt="Overview of the ω-HOME dataset tasks and collection setup" loading="lazy" /></a>
+                <a href="assets/figures/datasets.svg?v=4" target="_blank"><img src="assets/figures/datasets.svg?v=4" alt="Overview of the ω-HOME dataset tasks and collection setup" loading="lazy" /></a>
                 <figcaption><span>FIG. 02</span><p>ω-HOME task suite and multimodal data collection.</p></figcaption>
               </figure>
               <figure class="dataset-native-chart reveal">
@@ -233,7 +225,7 @@
           <div class="dataset-demos">
             <div class="dataset-demo-heading reveal">
               <span class="panel-label">DATASET DEMOS</span>
-              <p>Explore the dataset overview and browse task-level demonstrations by capability, camera view, and page.</p>
+              <!-- <p>Explore the dataset overview and browse task-level demonstrations by capability, camera view, and page.</p> -->
             </div>
             <article class="dataset-featured-demo reveal">
               <div class="dataset-featured-media interactive-feature-video" tabindex="0">
@@ -262,10 +254,6 @@
               <button class="task-page-next" type="button">Next <span>→</span></button>
             </nav>
           </div>
-          <!-- <div class="dataset-statement reveal">
-            <span>Not tabletop-only.</span>
-            <h3>Built around tasks where the humanoid must move its body <em>while</em> manipulating the world.</h3>
-          </div> -->
           <div class="dataset-detail-grid">
             <div class="capability-panel reveal">
               <span class="panel-label">24 HOUSEHOLD TASKS</span>
@@ -280,25 +268,20 @@
               <span class="panel-label">6 SYNCHRONIZED MODALITIES</span>
               <ol>
                 <li><span>01</span>Egocentric RGB</li><li><span>02</span>Exocentric RGB</li>
-                <li><span>03</span>Exocentric depth</li><li><span>04</span>Robot proprioception</li>
-                <li><span>05</span>Whole-body motion</li><li><span>06</span>Controller action latents</li>
+                <li><span>03</span>Exocentric depth</li><li><span>04</span>Robot state</li>
+                <li><span>05</span>Whole-body motion</li><li><span>06</span>Action latents</li>
               </ol>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- <section class="quote-band">
-        <div class="section-shell reveal">
-          <span class="quote-mark">“</span>
-          <blockquote>Locomotion and manipulation are not separate stages—they are one whole-body action.</blockquote>
-        </div>
-      </section> -->
-
       <section id="citation" class="content-section section-shell">
         <div class="section-index reveal">05 / CITATION</div>
         <div class="section-content citation-content">
-          <div class="section-heading reveal"><h2>Citation</h2><p>If you find this work useful, please cite it.</p></div>
+          <div class="section-heading reveal"><h2>Citation</h2>
+            <p>If you find this work useful, please cite it.</p>
+          </div>
           <div class="code-block reveal">
             <button class="copy-button" type="button" aria-label="Copy BibTeX">Copy</button>
             <pre><code>@article{li2026omega0,
