@@ -1,2 +1,6 @@
 *.llc
 scripts/
+tests/
+pyproject.toml
+uv.lock
+.venv
